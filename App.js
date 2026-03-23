@@ -8,9 +8,9 @@ import {
 } from "react-native";
 import Constants from "expo-constants";
 import logo from "./assets/images/logo.png";
-import poster from "./assets/images/poster.jpeg";
-
-const aspectRatio = poster.width / poster.height;
+import Hero from "./components/Hero";
+import Stats from "./components/Stats";
+import Cast from "./components/Cast";
 
 export default function App() {
   return (
@@ -22,24 +22,25 @@ export default function App() {
           resizeMode="contain"
         />
       </View>
-      <View style={[styles.padding]}>
-        <Text style={[styles.h1, styles.text]}>Inglourious Basterds</Text>
-        <Text style={[styles.text]}>2009 &#x2022; R &#x2022; 2h 33m</Text>
+      <View style={{ backgroundColor: "#212121" }}>
+        <View style={[styles.padding]}>
+          <Text style={[styles.h1, styles.text]}>Inglourious Basterds</Text>
+          <Text style={[styles.text]}>2009 &#x2022; R &#x2022; 2h 33m</Text>
+        </View>
+        <Hero />
+        <Stats />
       </View>
-      <View style={[styles.heroContainer, styles.padding]}>
-        <Image
-          source={poster}
-          style={{ width: 150 }}
-          resizeMode="contain"
-          onLoad={() => console.log("img loaded")}
-        />
-        <View style={{ flex: 1 }}>
-          <Text style={[styles.text]}>
-            In Nazi-occupied France during World War II, a plan to assassinate
-            Nazi leaders by a group of Jewish U.S. soldiers coincides with a
-            theatre owner's vengeful plans for the same.
+      <View>
+        <Cast />
+        <View style={[styles.padding]}>
+          <Text style={[styles.text, { fontWeight: 500 }]}>Director</Text>
+          <Text style={[styles.text, { color: "grey", marginBlockEnd: 12 }]}>
+            Quentin Tarantino
           </Text>
-          <Button title="+ ADD TO WATCHLIST" />
+          <Text style={[styles.text, { fontWeight: 500 }]}>Writers</Text>
+          <Text style={[styles.text, { color: "grey" }]}>
+            Quentin Tarantino
+          </Text>
         </View>
       </View>
     </ScrollView>
@@ -47,14 +48,16 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#191919",
+    marginBlockStart: Constants.statusBarHeight,
+    gap: 16,
+    paddingBlockEnd: 50,
+  },
   header: {
-    backgroundColor: "slategrey",
+    backgroundColor: "#393939",
     alignItems: "start",
     height: 60,
-  },
-  container: {
-    backgroundColor: "black",
-    marginBlockStart: Constants.statusBarHeight,
   },
   h1: {
     color: "white",
@@ -67,17 +70,5 @@ const styles = StyleSheet.create({
   padding: {
     paddingBlock: 5,
     paddingInline: 12,
-  },
-  horizontal: {
-    flexDirection: "row",
-  },
-  heroContainer: {
-    flexDirection: "row",
-    gap: 12,
-    height: 300,
-  },
-  image: {
-    width: 150,
-    // height: 200,
   },
 });
